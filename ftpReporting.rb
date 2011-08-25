@@ -1,9 +1,15 @@
 require 'net/ftp'
 require 'json'
 
+#create a ftp reference
 ftp = Net::FTP.new
+
+#connect to voxeo
 ftp.connect("ftp.voxeo.net")
-ftp.login("kbond","kb032811")
+
+#login with Tropo credentials
+ftp.login("username","password")
+
 
 #Go to the reporting directory
 ftp.chdir("/reports")
@@ -44,18 +50,18 @@ list.each { |index|
     #Check to see if it is a json file
     if index == "2011-#{month}-#{day}.cdr.json" 
       #Save the file to your computer
-      ftp.gettextfile(list[i])
+      ftp.gettextfile(index)
       #open that file
       report = File.open("path/to/file/2011-#{month}-#{day}.cdr.json", "r")
       #get the contents of that file
       contents = report.read
-      #got the contents - now close file
+      #after retreiving the contents, close file
       report.close
       #save the contents to the new file
       file.write("2011-#{month}-#{day}.cdr.json:\n" + contents + "\n\n")
     end
   end
 }
-#close the newly made file
+#close both files
 file.close
 
