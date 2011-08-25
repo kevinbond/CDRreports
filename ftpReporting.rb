@@ -5,7 +5,7 @@ require 'json'
 ftp = Net::FTP.new
 
 #connect to voxeo
-ftp.connect("ftp.voxeo.net")
+ftp.connect("ftp.tropo.com")
 
 #login with Tropo credentials
 ftp.login("username","password")
